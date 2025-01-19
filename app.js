@@ -9,6 +9,7 @@ const email = document.getElementById("signup_email");
 const password = document.getElementById("signup_password");
 const signup_btn = document.getElementById("signup_btn");
 
+// Creating Account
 signup_btn.addEventListener("click", async () => {
   const email = document.getElementById("signup_email");
   const password = document.getElementById("signup_password");
@@ -21,15 +22,17 @@ signup_btn.addEventListener("click", async () => {
 
     console.log("data=>", data);
     console.log("error=>", error);
-    document.getElementById("signup_cont").style.display = "none";
-    document.getElementById("signin_cont").style.display = "block";
     document.getElementById("signup_email").value = "";
     document.getElementById("signup_password").value = "";
+    document.getElementById("signup_cont").style.display = "none";
+    document.getElementById("signin_cont").style.display = "block";
+    
   } catch (e) {
-    console.log("error=>", e);
+    console.log(" signup error=>", e);
   }
 });
 
+// login functionalities
 const signin_btn = document.getElementById("signin_btn");
 signin_btn.addEventListener("click", async () => {
   try {
@@ -37,21 +40,25 @@ signin_btn.addEventListener("click", async () => {
       email: email.value,
       password: password.value,
     });
-    document.getElementById("auth_container").style.display = "none";
-    document.getElementById("user_container").style.display = "block";
     document.getElementById("signup_email").value = "";
     document.getElementById("signup_password").value = "";
+    document.getElementById("auth_container").style.display = "none";
+    document.getElementById("user_container").style.display = "block";
+    
   } catch (e) {
-    console.log(e);
+    console.log("login error=>",e);
   }
 });
 
+// logout functionalities
 const logout_btn = document.getElementById("logout_btn");
 logout_btn.addEventListener("click", async () => {
   try {
     const { error } = await supabase_config.auth.signOut();
     document.getElementById("user_container").style.display = "none";
     document.getElementById("auth_container").style.display = "block";
+    document.getElementById("signup_email").value = "";
+    document.getElementById("signup_password").value = "";
   } catch (e) {
     console.log(e);
   }
